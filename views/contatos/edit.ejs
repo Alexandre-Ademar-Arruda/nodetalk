@@ -1,0 +1,16 @@
+<% include ../partials/header %>
+<header>
+    <h1>Node talk</h1>
+    <h2>Editar Contato</h2>
+</header>
+<section>
+    <!-- Usamos o método POST (ou PUT simulado) para enviar a alteração -->
+    <form action="/contatos/<%= id %>?_method=PUT" method="POST">
+        <input type="text" name="contato[nome]" value="<%= contato.nome %>" required>
+        <input type="email" name="contato[email]" value="<%= contato.email %>" required>
+        <button type="submit">Salvar Alterações</button>
+    </form>
+    <br>
+    <a href="/contatos">Voltar</a>
+</section>
+<% include ../partials/footer %>

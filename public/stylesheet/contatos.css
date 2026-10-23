@@ -1,0 +1,126 @@
+/* Estilos gerais da página de contatos */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+header {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+header h1 {
+    color: #2c3e50;
+    font-size: 24px;
+}
+
+header h2 {
+    color: #34495e;
+    font-size: 18px;
+}
+
+header h4 {
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+section {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Container da lista de contatos */
+.contatos-grid {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.contato-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fdfdfd;
+    border: 1px solid #e1e8ed;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.contato-item:hover {
+    background-color: #f8fafc;
+}
+
+.contato-info strong {
+    color: #2c3e50;
+}
+
+.contato-info span {
+    color: #7f8c8d;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+/* Ações (Editar e Remover) */
+.contato-acoes {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.contato-acoes a {
+    text-decoration: none;
+    color: #3498db;
+    font-size: 14px;
+    padding: 6px 12px;
+    border: 1px solid #3498db;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.contato-acoes a:hover {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.contato-acoes button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 7px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.contato-acoes button:hover {
+    background-color: #c0392b;
+}
+
+/* Botão principal de inserir */
+section > button[type="button"] {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: background-color 0.2s;
+}
+
+section > button[type="button"]:hover {
+    background-color: #27ae60;
+}

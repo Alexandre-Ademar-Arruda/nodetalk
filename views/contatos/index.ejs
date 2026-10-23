@@ -1,0 +1,52 @@
+
+<style>
+    header h1, header h2, header h4, section, section h1, section h3 {display: flex;flex-direction: column;margin-bottom: 20px;margin-top: 0; }
+</style>
+<link rel="stylesheet" href="/stylesheet/contatos.css">
+<% include ../partials/header %>
+<header>
+    <h1>Node talk</h1>
+    <h2>Ola <%= usuario?usuario.nome:"Visitante" %>!</h2>
+    <h4>Seja Bem-vindo!</h4>
+</header>
+<section>
+    <h1>Bem vindo a pagina contatos</h1>
+    <% if(usuario && usuario.email) { %>
+        <h3>Seu email é: <%= usuario.email.toUpperCase() %>!</h3>
+    <% } %>
+    <div>
+        <form action="/contatos/buscar" method="GET">
+            <div style="display: flex; background-color: green; padding: 5px; gap: 10px;">
+                <h2>Meus contatos</h2> 
+                <input name="termo" id="seek-contact" style="padding: 2px;" type="text" placeholder="pesquise o nome"> 
+                <button type="submit" style="padding: 5px;">pesquisar</button>
+            </div>
+        </form>
+        <% if(typeof contatos!== "undefined" && contatos.length > 0) { %>
+            <ul class="contatos-grid">
+                <% contatos.forEach(function(contato, index) { %>
+                    <li class="contato-item">
+                        <div class="contato-info">
+                            <strong><%= contato.nome %></strong>
+                            <span>(<%= contato.email %>)</span>
+                        </div>
+                        <div class="contato-acoes">
+                            <a href="/contatos/<%= index %>/edit">editar</a>
+                            <a href="/chat/<%= contato.email %>">Conversar</a>
+                            <form action="/contatos/<%= index %>/remover" method="POST" style="display:inline;">
+                                <button type="submit">Remover</button>
+                            </form>
+                        </div>
+                    </li>
+                <% }) %>
+            </ul>    
+        <% } else{ %>
+            <p>Nenhum contato cadastrado ainda.</p>
+        <% } %>
+    </div>
+
+<button type="button" onclick="toggleFormulario()" >Inserir Contato</button>    
+    <p>Voltar para home <a href="/">Home page</a></p>
+    <% include ../partials/formInserir %>
+</section>
+<% include ../partials/footer %>

@@ -1,0 +1,36 @@
+<% include ../partials/header %>
+
+<header>
+    <h1>Node talk</h1>
+    <h2>Ola <%= usuario ? usuario.nome : 'Visitante' %>!</h2>
+    <h4>Seja Bem-vindo!</h4>
+</header>
+
+<section>
+    <h1>Bem vindo a pagina contatos</h1>
+    <% if (usuario && usuario.email) { %>
+        <h3>Seu email é: <%= usuario.email.toUpperCase() %>!</h3>
+    <% } %>
+
+    <!-- LISTA DE CONTATOS INSERIDOS -->
+    <h2>Meus Contatos</h2>
+    <ul>
+        <% if (typeof contatos !== 'undefined' && contatos.length > 0) { %>
+            <% contatos.forEach(function(contato, index) { %>
+                <li>
+                    <strong><%= contato.nome %></strong> (<%= contato.email %>)
+                    <a href="/contato/<%= index %>">Ver</a>
+                    <a href="/contato/<%= index %>/editar">Editar</a>
+                </li>
+            <% }); %>
+        <% } else { %>
+            <p>Nenhum contato cadastrado ainda.</p>
+        <% } %>
+    </ul>
+
+    <!-- Botão e Formulário para Inserir -->
+    <button type="button" onclick="toggleFormulario()">Inserir Contato</button>
+    <% include ../partials/formInserir %>
+</section>
+
+<% include ../partials/footer %>

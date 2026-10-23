@@ -1,0 +1,15 @@
+<form id="form-contato" action="/contatos" method="POST" style="display: none; margin-top: 15px;">
+    <input type="text" name="contato[nome]" placeholder="Nome do contato" required>
+    <input type="email" name="contato[email]" placeholder="E-mail do contato" required>
+    <button type="submit">Adicionar Contato</button>
+</form>
+<script>
+    function toggleFormulario(){
+        var form=document.getElementById("form-contato")
+        if(form.style.display==="none"){
+            form.style.display="block"
+        }else{
+            form.style.display="none"
+        }
+    }
+</script>
