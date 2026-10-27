@@ -50,12 +50,13 @@ io.sockets.on("connection",function(client){
             if(!fs.existsSync(uploadsDir)){
                 fs.mkdirSync(uploadsDir,{recursive:true})
             }
-            var pathName=path.join(__dirname,"public","upload")
-            fs.writeFile(pathName, Buffer.from(data.arquivo.dados),(err)=>{
+            var filePath=path.join(uploadsDir,fileName)
+            fs.writeFile(filePath, Buffer.from(data.arquivo.dados),function(err){
                 if(!err){
-                    resposta.arquivoUrl=`/upload/${fileName}`
-                    resposta.tipoArquivo=data.arquivo.tipo
+                    console.error("Erro ao salvar file enviado:",err)
                 }
+                resposta.arquivoUrl=`/upload/${fileName}`
+                resposta.tipoArquivo=data.arquivo.tipo
                 io.emit("send-client",formatarMensagem(resposta))
             })
         }else{
