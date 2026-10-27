@@ -9,11 +9,11 @@
         var nome=document.getElementById("nome").value
         var msg=document.getElementById("msg").value
         var fileInput=document.getElementById("arquivo")
-        if(fileInput.files.lenght>0){
+        if(fileInput.files.length>0){
             var file=fileInput.files[0]
             var reader=new FileReader()
 
-            reader.onloader=function(e){
+            reader.onload=function(e){
                 socket.emit("send-server",{
                     nome:nome,
                     msg:msg,
@@ -24,8 +24,8 @@
                     }
                 })
                 fileInput.value=""
-
             }
+            reader.readAsArrayBuffer(file)
         }else{
             socket.emit("send-server",{nome:nome,msg:msg})
         }
