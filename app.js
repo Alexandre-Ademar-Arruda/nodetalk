@@ -53,7 +53,7 @@ io.sockets.on("connection",function(client){
             var pathName=path.join(__dirname,"public","upload")
             fs.writeFile(pathName, Buffer.from(data.arquivo.dados),(err)=>{
                 if(!err){
-                    resposta.arquivoUrl=`/uploads/${fileName}`
+                    resposta.arquivoUrl=`/upload/${fileName}`
                     resposta.tipoArquivo=data.arquivo.tipo
                 }
                 io.emit("send-client",formatarMensagem(resposta))
