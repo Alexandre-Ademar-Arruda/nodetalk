@@ -1,20 +1,23 @@
 
 var express=require("express")
 var http=require("http")
-
-
 var app=express()
+var server=http.createServer(app)
+var io=require("socket.io").listen(server)
+var cookieParser=require("cookie-parser")
+var session=require("express-session")
+var bodyParser=require("body-parser")
+var load=require("express-load")
+var fs=require("fs")
+var path=require("path")
+var error=require("./middleware/error")
+var port=process.env.PORT || 3000
+
 app.set("views",__dirname + "/views");//aqui mostra o path onde estao os files de visualization
 app.set("view engine","ejs")//aqui define o motor de visualização
 
-var server=http.createServer(app)
-
-var io=require("socket.io").listen(server)
-
-var cookieParser=require("cookie-parser")
 app.use(cookieParser("nodeTalk"))
 
-var session=require("express-session")
 app.use(session({
     secret:"nodeTalk",
     resave:true,
@@ -25,20 +28,16 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(express.static(__dirname + "/public"))
 
-var bodyParser=require("body-parser")
 app.use(bodyParser.urlencoded({
     extended:true
 }))
 
 
-var load=require("express-load")
 load("models")
 .then("controllers")
 .then("routes")
 .into(app)
 
-var fs=require("fs")
-var path=require("path")
 
 io.sockets.on("connection",function(client){
     client.on("send-server",function(data){
@@ -52,7 +51,7 @@ io.sockets.on("connection",function(client){
             }
             var filePath=path.join(uploadsDir,fileName)
             fs.writeFile(filePath, Buffer.from(data.arquivo.dados),function(err){
-                if(!err){
+                if(err){
                     console.error("Erro ao salvar file enviado:",err)
                 }
                 resposta.arquivoUrl=`/upload/${fileName}`
@@ -78,11 +77,9 @@ io.sockets.on("connection",function(client){
 })
 
 
-var error=require("./middleware/error")
 app.use(error.notFound)
 app.use(error.serverError)
 
-var port=process.env.PORT || 3000
 server.listen(port,function(){
     console.log("NodeTalk no ar...uhu!!!");
 })
