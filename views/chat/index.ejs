@@ -8,7 +8,27 @@
     var enviar=function(){
         var nome=document.getElementById("nome").value
         var msg=document.getElementById("msg").value
-        socket.emit("send-server",{nome:nome, msg:msg})
+        var fileInput=document.getElementById("arquivo")
+        if(fileInput.files.lenght>0){
+            var file=fileInput.files[0]
+            var reader=new FileReader()
+
+            reader.onloader=function(e){
+                socket.emit("send-server",{
+                    nome:nome,
+                    msg:msg,
+                    arquivo:{
+                        nome:file.name,
+                        tipo:file.type,
+                        dados:e.target.result
+                    }
+                })
+                fileInput.value=""
+
+            }
+        }else{
+            socket.emit("send-server",{nome:nome,msg:msg})
+        }
         document.getElementById("msg").value=""
     }
 </script>
@@ -19,6 +39,7 @@
     <pre id="chat"></pre>
     <input type="hidden" id="nome" value="<%- usuario.nome %>">
     <input type="text" id="msg" placeholder="Mensagem">
+    <input type="file" id="arquivo" accept="video/*,image/*">
     <button onclick="enviar();">Enviar</button>
 </section>
 <% include ../exit %>

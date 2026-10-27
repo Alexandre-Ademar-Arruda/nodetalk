@@ -18,7 +18,7 @@ var session=require("express-session")
 app.use(session({
     secret:"nodeTalk",
     resave:true,
-    saveUnitialized:true
+    saveUninitialized:true
 }))
 
 app.use(express.urlencoded({extended:true}))
@@ -37,20 +37,47 @@ load("models")
 .then("routes")
 .into(app)
 
+var fs=require("fs")
+var path=require("path")
+
 io.sockets.on("connection",function(client){
     client.on("send-server",function(data){
-        //var msg="<b>"+data.nome+":</b>"+data.msg+"<br>"
-        var msg=`<b>${data.nome}:</b> ${data.msg}<br>`
-        client.emit("send-client",msg)
-        client.broadcast.emit("send-client",msg)
+        var resposta={nome:data.nome,msg:data.msg}
+        if(data.arquivo){
+            var ext=path.extname(data.arquivo.nome)
+            var fileName=Date.now()+ext
+            var pathName=path.join(__dirname,"public","upload")
+            fs.writeFile(pathName, Buffer.from(data.arquivo.dados),(err)=>{
+                if(!err){
+                    resposta.arquivoUrl=`/uploads/${fileName}`
+                    resposta.tipoArquivo=data.arquivo.tipo
+                }
+                io.emit("send-client",formatarMensagem(resposta))
+            })
+        }else{
+            io.emit("send-client",formatarMensagem(resposta))
+        }
     })
+    function formatarMensagem(dados){
+        var html=`<p><strong>${dados.nome}:</strong> ${dados.msg}</p>`
+        if(dados.arquivoUrl){
+            if(dados.tipoArquivo.startsWith("image/")){
+                html+=`<br><img src="${dados.arquivoUrl}" width="200">`
+            }else if(dados.tipoArquivo.startsWith("video/")){
+                html+=`<br><video src="${dados.arquivoUrl}" width="300" controls></video>`
+            }
+        }
+        return html
+    }
     console.log("Um usuario se conectou ao chat via Socket.io")
 })
+
 
 var error=require("./middleware/error")
 app.use(error.notFound)
 app.use(error.serverError)
 
-server.listen(3000,function(){
+var port=process.env.PORT || 3000
+server.listen(port,function(){
     console.log("NodeTalk no ar...uhu!!!");
 })
