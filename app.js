@@ -46,7 +46,7 @@ io.sockets.on("connection",function(client){
         if(data.arquivo){
             var ext=path.extname(data.arquivo.nome)
             var fileName=Date.now()+ext
-            var uploadsDir=path.join(__dirname,"public","uploads")
+            var uploadsDir=path.join(__dirname,"public","upload")
             if(!fs.existsSync(uploadsDir)){
                 fs.mkdirSync(uploadsDir,{recursive:true})
             }
