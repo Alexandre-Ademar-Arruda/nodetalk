@@ -3,11 +3,29 @@ var cloudinary = require("cloudinary").v2;
 module.exports=function(app){
     var ChatController={
         index: function(req,res){
-            var resultado={
-                email: req.params.email,
-                usuario: req.session.usuario
+            if(!req.session.usuario){
+                return res.redirect("/")
             }
-            res.render("chat/index",resultado)
+            var usuarioAtual=req.session.usuario.email
+            var outroUsuario=req.params.email
+            var chatPrivado=[usuarioAtual,outroUsuario].sort().join("_")
+                
+            res.render("chat/index",{
+                usuario: req.session.usuario,
+                sala: chatPrivado,
+                destinatario: outroUsuario
+            })
+        },
+        listarContatos: function(req,res){
+            if(!req.session.usuario){
+                return res.redirect("/")
+            }
+            var usuarioLogado=req.session.usuario
+            res.render("contatos/index",{
+                usuario:usuarioLogado,
+                contatos: req.app.locals.todosContatos
+            })
+
         },
         upload: function(req,res){
             if(!req.file){

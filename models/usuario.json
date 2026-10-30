@@ -3,53 +3,25 @@
         "id": 1,
         "nome": "alexandre",
         "email": "alexandre@gmail.com",
-        "contatos": [
-            {
-                "nome": "aaa",
-                "email": "aaa@aaa"
-            },
-            {
-                "nome": "bbb",
-                "email": "bbb@bbb"
-            }
-        ]
+        "contatos": []
     },
     {
         "id": 2,
         "nome": "sandra",
         "email": "sandra@gmail.com",
-        "contatos": [
-            {
-                "nome": "gggyyy",
-                "email": "qqq@www"
-            },
-            {
-                "nome": "aaa",
-                "email": "lxndr.dmr@gmail.com"
-            }
-        ]
+        "contatos": []
     },
     {
         "id": 3,
         "nome": "joao",
         "email": "joao@gmail.com",
-        "contatos": [
-            {
-                "nome": "joel",
-                "email": "joel@gmail.com"
-            }
-        ]
+        "contatos": []
     },
     {
         "id": 4,
         "nome": "nicole",
         "email": "nicole@gmail.com",
-        "contatos": [
-            {
-                "nome": "AAA",
-                "email": "aaa@gmail.com"
-            }
-        ]
+        "contatos": []
     },
     {
         "id": 5,
@@ -61,124 +33,80 @@
         "id": 6,
         "nome": "teovaldo",
         "email": "teovaldo@gmail.com",
-        "contatos": [
-            {
-                "nome": "bbb",
-                "email": "bbb@bbb"
-            },
-            {
-                "nome": "ccc",
-                "email": "h1.alexandre@gmail.com"
-            }
-        ]
+        "contatos": []
     },
     {
         "id": 7,
         "nome": "qqq",
         "email": "qqq@gmail.com",
-        "contatos": [
-            {
-                "nome": "fsfsf",
-                "email": "sfsfs@gmail.com"
-            }
-        ]
+        "contatos": []
     },
     {
         "id": 8,
         "nome": "laura",
         "email": "laura@gmail.com",
-        "contatos": [
-            {
-                "nome": "ddd",
-                "email": "ddd@gmail.com"
-            }
-        ]
+        "contatos": []
     },
     {
         "id": 9,
         "nome": "wendel",
         "email": "wendel@gmail.com",
-        "contatos": [
-            {
-                "nome": "qqq",
-                "email": "qqq@www"
-            }
-        ]
+        "contatos": []
     },
     {
         "id": 10,
         "nome": "lll",
         "email": "lll@gmail.com",
-        "contatos": [
-            {
-                "nome": "hhh",
-                "email": "hhh@gmail.com"
-            }
-        ]
+        "contatos": []
     },
     {
         "id": 11,
         "nome": "fff",
         "email": "fff@qwe",
-        "contatos": [
-            {
-                "nome": "hhh",
-                "email": "hhh@gmail.com"
-            }
-        ]
+        "contatos": []
     },
     {
         "id": 12,
         "nome": "deco",
         "email": "deco@gmail.com",
-        "contatos": [
-            {
-                "nome": "123",
-                "email": "123@123"
-            }
-        ]
+        "contatos": []
     },
     {
         "id": 13,
         "nome": "456",
         "email": "456@456",
-        "contatos": [
-            {
-                "nome": "bbb",
-                "email": "bbb@bbb"
-            }
-        ]
+        "contatos": []
     },
     {
         "id": 14,
         "nome": "ccc",
         "email": "ccc@ccc",
-        "contatos": [
-            {
-                "nome": "789",
-                "email": "789@789"
-            }
-        ]
+        "contatos": []
     },
     {
         "id": 15,
         "nome": "aaa",
         "email": "aaa@aaa",
-        "contatos": [
-            {
-                "nome": "aaa",
-                "email": "aaa@aaa"
-            }
-        ]
+        "contatos": []
     },
     {
         "id": 16,
         "nome": "bbb",
         "email": "bbb@bbb",
+        "contatos": []
+    },
+    {
+        "id": 17,
+        "nome": "ccc",
+        "email": "ccc@ccc ",
         "contatos": [
             {
-                "nome": "bbb",
-                "email": "bbb@bbb"
+                "nome": "ccc",
+                "email": "ccc@ccc"
+            },
+            {
+                "nome": "ddd",
+                "email": "ddd@ddd"
             }
         ]
     }

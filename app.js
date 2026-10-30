@@ -18,15 +18,16 @@ app.set("view engine","ejs")//aqui define o motor de visualização
 
 app.use(cookieParser("nodeTalk"))
 
+app.use(express.urlencoded({extended:true}))
+app.use(express.json())
+app.use(express.static(__dirname + "/public"))
+
 app.use(session({
     secret:"nodeTalk",
     resave:true,
     saveUninitialized:true
 }))
 
-app.use(express.urlencoded({extended:true}))
-app.use(express.json())
-app.use(express.static(__dirname + "/public"))
 
 app.use(bodyParser.urlencoded({
     extended:true
@@ -40,6 +41,10 @@ load("models")
 
 
 io.sockets.on("connection",function(client){
+    client.on("entrar-sala",function(sala){
+        client.join(sala)
+        console.log(`Usuario entrou na sala: ${sala}`)
+    })
     client.on("send-server",function(data){
         var resposta={nome:data.nome,msg:data.msg}
         if(data.arquivo){

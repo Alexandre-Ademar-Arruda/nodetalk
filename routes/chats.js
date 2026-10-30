@@ -1,5 +1,5 @@
 module.exports=function(app){
     var chat=app.controllers.chat
+    app.get("/contatos",chat.listarContatos)
     app.get("/chat/:email",chat.index)
-    // app.post("/chat/upload",upload.single("arquivo"),chat.upload)
 }

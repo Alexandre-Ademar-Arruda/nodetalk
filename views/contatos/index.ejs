@@ -15,13 +15,43 @@
         <h3>Seu email é: <%= usuario.email.toUpperCase() %>!</h3>
     <% } %>
     <div>
-        <form action="/contatos/buscar" method="GET">
-            <div style="display: flex; background-color: green; padding: 5px; gap: 10px;">
-                <h2>Meus contatos</h2> 
-                <input name="termo" id="seek-contact" style="padding: 2px;" type="text" placeholder="pesquise o nome"> 
-                <button type="submit" style="padding: 5px;">pesquisar</button>
+        <section>
+            <h1>Lista de Contatos Disponíveis</h1>
+            <% if(usuario && usuario.email) { %>
+                <h3>Logado como: <%= usuario.nome || usuario.email %></h3>
+            <% } %>
+
+            <div style="margin-top: 20px;">
+                <% if(typeof contatos !== "undefined" && contatos.length > 0) { %>
+                    <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background-color: #f2f2f2;">
+                                <th style="text-align: left;">Apelido / Nome</th>
+                                <th style="text-align: center; width: 150px;">Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% contatos.forEach(function(contato) { %>
+                                <!-- Evita que o usuário clique para conversar consigo mesmo -->
+                                <% if(contato.email !== usuario.email) { %>
+                                    <tr>
+                                        <td><strong><%= contato.nome %></strong> (<%= contato.email %>)</td>
+                                        <td style="text-align: center;">
+                                            <!-- O botão redireciona para a rota que cria/entra na sala privada -->
+                                            <a href="/chat/<%= contato.email %>" style="text-decoration: none; background-color: #007bff; color: white; padding: 6px 12px; border-radius: 4px;">Conversar</a>
+                                        </td>
+                                    </tr>
+                                <% } %>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                <% } else { %>
+                    <p>Nenhum outro contato cadastrado no momento.</p>
+                <% } %>
             </div>
-        </form>
+
+            <p style="margin-top: 20px;"><a href="/">Voltar para Home</a></p>
+        </section>
         <% if(typeof contatos!== "undefined" && contatos.length > 0) { %>
             <ul class="contatos-grid">
                 <% contatos.forEach(function(contato, index) { %>
